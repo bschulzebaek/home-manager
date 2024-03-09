@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ -e /home/baek/.nix-profile/etc/profile.d/nix.sh ]; then
+    source /home/baek/.nix-profile/etc/profile.d/nix.sh
+    export NIXPKGS_ALLOW_UNFREE=1
+fi
+
+eval "$(direnv hook bash)"

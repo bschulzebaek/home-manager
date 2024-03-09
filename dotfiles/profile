@@ -1,0 +1,7 @@
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+source "$HOME/.bashrc"
+. "$HOME/.cargo/env"

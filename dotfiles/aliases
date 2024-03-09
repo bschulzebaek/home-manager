@@ -1,0 +1,23 @@
+#!/bin/bash
+
+alias cc="clear"
+alias ll='ls -laht'
+alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+
+alias yolo="git push -f"
+alias sw="git switch"
+alias p="git push"
+alias s="git status"
+alias d="git diff"
+alias l="git log"
+alias fp="git fetch && git pull"
+alias c="git commit"
+alias ca="git commit --amend"
+alias ga="git add ."
+alias gcl="git clean -fd"
+alias grs="git reset --soft"
+alias grh="git reset --hard"
+
+alias wf="workspace-finder"
+
+alias ta="tmux attach"

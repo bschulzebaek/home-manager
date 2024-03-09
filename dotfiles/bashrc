@@ -1,0 +1,9 @@
+source $HOME/.aliases
+source $HOME/.devenvrc
+source $HOME/.prompt
+source $HOME/.wsl
+source $HOME/.cargo/env
+
+for function in $HOME/.functions/??*; do
+    source $(realpath $function)
+done

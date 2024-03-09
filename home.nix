@@ -3,45 +3,37 @@
 {
   home.username = "root";
   home.homeDirectory = "/root";
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
   home.stateVersion = "23.11";
+  targets.genericLinux.enable = true;
+
   home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    pkgs.hello
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
+    pkgs.htop
   ];
 
-  home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
-  };
-
-  home.sessionVariables = {
-    # EDITOR = "emacs";
-  };
-
   programs.home-manager.enable = true;
+  programs.fzf.enable = true;
+  programs.bat.enable = true;
+  programs.neovim = {
+    enable = true;
+    vimAlias = true;
+  };
+
+  home.file = {
+    ".aliases".source = ./dotfiles/aliases;
+    ".bashrc".source = ./dotfiles/bashrc;
+    ".devenvrc".source = ./dotfiles/devenvrc;
+    ".fzf.bash".source = ./dotfiles/fzf.bash;
+    ".gitconfig".source = ./dotfiles/gitconfig;
+    ".inputrc".source = ./dotfiles/inputrc;
+    ".profile".source = ./dotfiles/profile;
+    ".prompt".source = ./dotfiles/prompt;
+    ".tmux.conf".source = ./dotfiles/tmux.conf;
+    ".wsl".source = ./dotfiles/wsl;
+
+    ".functions" = {
+      source = ./functions;
+      recursive = true;
+    };
+
+  };
 }

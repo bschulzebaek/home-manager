@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+function extension-check() {
+    set -euo pipefail
+
+    if [ $# -eq 0 ]
+    then
+        echo "Error: Plugin directory missing!" 1>&2
+        exit 1
+    fi
+
+    local PLUGIN_DIR="$1"
+
+    printf "Validating plugin at ${PLUGIN_DIR}\n"
+
+    printf "\nFind \"!important\" in CSS files \n"
+    find ${PLUGIN_DIR} -type f \( -name '*.scss' -o -name '*.css' \) ! -path '*/src/Resources/public/administration/*' ! -path '*/node_modules/*' -exec grep -H '\!important' {} \;
+
+    printf "\nCheck for \"FOREIGN_KEY_CHECKS\"\n"
+    find ${PLUGIN_DIR} -type f -name '*.php' -exec egrep -Hi 'FOREIGN_KEY_CHECKS' {} \;
+
+    printf "\nCheck for prohibited debugging code (PHP)\n"
+    find ${PLUGIN_DIR} -type f -name "*.php" -exec egrep -H '(die|exit|\sdd|dump)' {} \;
+
+    printf "\nCheck for prohibited debugging code (JavaScript)\n"
+    find ${PLUGIN_DIR} -type f \( -name "*.js" -o -name "*.ts" -o -name "*.html.twig" \) ! -path '*/src/Resources/public/administration/*'  ! -path '*/node_modules/*' -exec egrep -H '(\sconsole\.)' {} \;
+
+    printf "\nCheck for \"createDefaultContext\"\n"
+    find ${PLUGIN_DIR} -type f -name '*.php' -exec egrep -H '\:\:createDefaultContext\(.*\)' {} \;
+
+    printf "\nFind links (check for suspicious ones)\n"
+    find ${PLUGIN_DIR} -type d \( -name 'node_modules' -o -name 'vendor' -o -name 'public' \) -prune -o -type f \( -name 'composer.lock' -o -name 'package-lock.json' -o -name '*.map' \) -prune -o -type f -exec egrep -H 'http[s]*\:\/\/' {} \;
+
+    printf "\nFind path traversals in twig files\n"
+    find ${PLUGIN_DIR} -type f -name '*.twig' -exec egrep -H '\.\.\/' {} \;
+}
