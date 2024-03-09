@@ -8,6 +8,9 @@
 
   home.packages = [
     pkgs.htop
+    pkgs.rustup
+    pkgs.python3
+    pkgs.nodejs-18_x
   ];
 
   programs.home-manager.enable = true;
@@ -34,6 +37,5 @@
       source = ./functions;
       recursive = true;
     };
-
   };
 }
