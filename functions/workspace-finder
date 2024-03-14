@@ -3,7 +3,7 @@
 function workspace-finder() {
     local ROOT=~/development/
     local DIRS=(
-        ~/terminal 
+        ~/.config/home-manager
         ~/.config/nvim
     )
     local TMP_DIRS=()
