@@ -27,7 +27,7 @@ function workspace-finder() {
 
     local TARGET_DIR=$(printf '%s\n' "${TMP_DIRS[@]}" | fzf)
 
-    [ $TARGET_DIR ] || exit 0
+    [ $TARGET_DIR ] || return 0
 
     if [ "$TMUX" ]; then
         tmux new-window -t $(tmux display-message -p '#S'): -c $TARGET_DIR

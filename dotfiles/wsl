@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# Note: The IP has to match the ACTIVE network adapter IPv4 address!
-#export DISPLAY=$(/mnt/c/Windows/System32/ipconfig.exe | grep 192.168. | grep -m1 IPv4 | awk '{print $14}' | tr -d '\r'):0.0

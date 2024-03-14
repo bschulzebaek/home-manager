@@ -6,7 +6,7 @@ function extension-check() {
     if [ $# -eq 0 ]
     then
         echo "Error: Plugin directory missing!" 1>&2
-        exit 1
+        return 1
     fi
 
     local PLUGIN_DIR="$1"
