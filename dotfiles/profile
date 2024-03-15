@@ -4,4 +4,3 @@ case $- in
 esac
 
 source "$HOME/.bashrc"
-. "$HOME/.cargo/env"
