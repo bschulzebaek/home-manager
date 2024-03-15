@@ -18,6 +18,7 @@
     rustup
     python3
     nodejs-18_x
+    go
 
     spotify
     google-chrome
