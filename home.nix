@@ -14,6 +14,8 @@
     neofetch
     bat
     fzf
+    zip
+    lazygit
 
     rustup
     python3
