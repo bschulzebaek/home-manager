@@ -1,5 +1,6 @@
 #!/bin/bash
 
+alias cc="clear"
 alias ll='ls -laht'
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 
