@@ -16,6 +16,7 @@
     fzf
     zip
     lazygit
+    ripgrep
 
     rustup
     python3
