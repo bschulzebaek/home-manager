@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
+let 
+  unstable = import <nixos-unstable> {};
+in
 {
   home.username = "baek";
   home.homeDirectory = "/home/baek";
@@ -25,6 +28,8 @@
 
     spotify
     google-chrome
+
+    unstable.devenv
   ];
 
   programs.fzf.enable = true;

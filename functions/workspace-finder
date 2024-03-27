@@ -8,19 +8,6 @@ function workspace-finder() {
     )
     local TMP_DIRS=()
 
-    local OPTSTRING=":t"
-    local OPTIND
-
-    local tmuxSession=0
-
-    while getopts ${OPTSTRING} opt; do
-        case ${opt} in
-            t)
-                tmuxSession=1
-                ;;
-        esac
-    done
-
     readarray -d '' TMP_DIRS < <(find $ROOT -maxdepth 1 -mindepth 1 -type d -print0)
 
     TMP_DIRS+=("${DIRS[@]}")
@@ -29,11 +16,5 @@ function workspace-finder() {
 
     [ $TARGET_DIR ] || return 0
 
-    if [ "$TMUX" ]; then
-        tmux new-window -t $(tmux display-message -p '#S'): -c $TARGET_DIR
-    elif [ $tmuxSession -eq 1 ]; then
-        tmux new-session -c $TARGET_DIR
-    else
-        cd "${TARGET_DIR}"
-    fi
+    cd "${TARGET_DIR}"
 }

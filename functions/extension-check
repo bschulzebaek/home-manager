@@ -28,6 +28,9 @@ function extension-check() {
     printf "\nCheck for \"createDefaultContext\"\n"
     find ${PLUGIN_DIR} -type f -name '*.php' -exec egrep -H '\:\:createDefaultContext\(.*\)' {} \;
 
+    printf "\nCheck for manual context creation\n"
+    find ${TMPDIR} -type f -name '*.php' -exec egrep -H ' new Context\(' {} \;
+
     printf "\nFind links (check for suspicious ones)\n"
     find ${PLUGIN_DIR} -type d \( -name 'node_modules' -o -name 'vendor' -o -name 'public' \) -prune -o -type f \( -name 'composer.lock' -o -name 'package-lock.json' -o -name '*.map' \) -prune -o -type f -exec egrep -H 'http[s]*\:\/\/' {} \;
 
