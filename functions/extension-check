@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function extension-check() {
-    set -euo pipefail
+    #set -euo pipefail
 
     if [ $# -eq 0 ]
     then
@@ -36,4 +36,6 @@ function extension-check() {
 
     printf "\nFind path traversals in twig files\n"
     find ${PLUGIN_DIR} -type f -name '*.twig' -exec egrep -H '\.\.\/' {} \;
+
+
 }

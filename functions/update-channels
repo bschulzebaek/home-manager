@@ -1,0 +1,8 @@
+#!/bin/bash
+
+function update-channels() {
+    nix-channel --update nixpkgs
+    nix-channel --update nixos-unstable
+
+    home-manager switch
+}
