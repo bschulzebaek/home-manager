@@ -26,7 +26,6 @@ in
     nodejs-18_x
     go
 
-    spotify
     google-chrome
 
     unstable.devenv
