@@ -39,6 +39,9 @@ in
     extraConfig = {
       user.name = "Benedikt Schulze Baek";
       user.email = "b.schulze-baek@shopware.com";
+      commit.gpgsign = true;
+      gpg.format = "ssh";
+      user.signingkey = "/home/baek/.ssh/id_rsa.pub";
       core.autocrlf = false;
       core.fileMode = false;
       core.editor = "vim";
