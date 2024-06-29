@@ -1,0 +1,11 @@
+source $HOME/.aliases
+source $HOME/.devenvrc
+source $HOME/.prompt
+
+for function in $HOME/.functions/??*; do
+    source $(realpath $function)
+done
+
+# macOS specific
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
