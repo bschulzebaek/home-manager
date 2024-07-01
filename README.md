@@ -17,6 +17,12 @@ The following nix-channel are required (see `nix-channel --list`)
 | nixpkgs | https://nixos.org/channels/nixpkgs-unstable |
 | unstable | https://nixos.org/channels/nixpkgs-unstable |
 
+If the NIX_PATH variable isn't set properly after updating channels:
+
+```
+export NIX_PATH=home-manager=/home/baek/.nix-defexpr/channels/home-manager:nixpkgs=/home/baek/.nix-defexpr/channels/nixpkgs:unstable=/home/baek/.nix-defexpr/channels/unstable
+```
+
 ### Linux
 1. Clone this repository to `~/.config/home-manager`
 2. Run `home-manager switch` to apply the config
