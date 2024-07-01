@@ -8,6 +8,15 @@ WIP / Trying out nix & home-manager
 1. Install [nix / nixOS](https://nixos.org/download/)
 2. Install [home-manager](https://nix-community.github.io/home-manager/index.xhtml#ch-installation)
 
+### nix-channel
+The following nix-channel are required (see `nix-channel --list`)
+
+|---|---|
+|---|---|
+| home-manager | https://github.com/nix-community/home-manager/archive/master.tar.gz |
+| nixpkgs | https://nixos.org/channels/nixpkgs-unstable |
+| unstable | https://nixos.org/channels/nixpkgs-unstable |
+
 ### Linux
 1. Clone this repository to `~/.config/home-manager`
 2. Run `home-manager switch` to apply the config

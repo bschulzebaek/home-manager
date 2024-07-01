@@ -9,10 +9,13 @@ function workspace-finder() {
     local TMP_DIRS=()
 
     while IFS=  read -r -d $'\0'; do
-        TMP_DIRS+=$(readlink -f $REPLY)
+        TMP_DIRS+=("$(readlink -f $REPLY)")
     done < <(find $ROOT -maxdepth 1 -mindepth 1 -type d -print0)
 
     TMP_DIRS+=("${DIRS[@]}")
+
+    IFS=$'\n' TMP_DIRS=($(sort <<<"${TMP_DIRS[*]}"))
+    unset IFS
 
     local TARGET_DIR=$(printf '%s\n' "${TMP_DIRS[@]}" | fzf)
 
