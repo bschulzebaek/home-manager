@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   unstable = import <unstable> {};
@@ -11,4 +11,6 @@ in
   imports = [
     ./common/common.nix
   ];
+
+  programs.git.extraConfig.user.email = lib.mkForce "b.schulze-baek@shopware.com";
 }
