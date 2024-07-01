@@ -1,4 +1,5 @@
 $include /etc/inputrc
+
 set completion-ignore-case on
 set completion-query-items 0
 set show-all-if-unmodified off
@@ -12,4 +13,3 @@ set visible-stats on
 TAB: menu-complete
 "\e[A": history-search-backward
 "\e[B": history-search-forward
-

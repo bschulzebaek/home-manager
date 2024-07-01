@@ -11,16 +11,15 @@ WIP / Trying out nix & home-manager
 ### nix-channel
 The following nix-channel are required (see `nix-channel --list`)
 
-|---|---|
+|Name|Channel|
 |---|---|
 | home-manager | https://github.com/nix-community/home-manager/archive/master.tar.gz |
-| nixpkgs | https://nixos.org/channels/nixpkgs-unstable |
 | unstable | https://nixos.org/channels/nixpkgs-unstable |
 
 If the NIX_PATH variable isn't set properly after updating channels:
 
 ```
-export NIX_PATH=home-manager=/home/baek/.nix-defexpr/channels/home-manager:nixpkgs=/home/baek/.nix-defexpr/channels/nixpkgs:unstable=/home/baek/.nix-defexpr/channels/unstable
+export NIX_PATH=home-manager=/home/baek/.nix-defexpr/channels/home-manager:unstable=/home/baek/.nix-defexpr/channels/unstable
 ```
 
 ### Linux
