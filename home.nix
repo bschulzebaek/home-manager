@@ -10,6 +10,7 @@ in
 
   imports = [
     ./common/common.nix
+    ./common/activation.nix
   ];
 
   programs.git.extraConfig.user.email = lib.mkForce "b.schulze-baek@shopware.com";

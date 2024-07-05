@@ -14,8 +14,8 @@ in
     bat
     fzf
     zip
-    lazygit
     ripgrep
+    jq
 
     rustup
     python3

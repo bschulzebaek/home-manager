@@ -14,6 +14,7 @@
 
     imports = [
       ./common/common.nix
+      ./common/activation.nix
     ];
   };
 
