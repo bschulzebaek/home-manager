@@ -2,11 +2,19 @@
 
 function workspace-finder() {
     local ROOT=~/development/
-    local DIRS=(
+    local HARDCODED=(
         ~/.config/home-manager
         ~/.config/nvim
+        ~/.nixpkgs
     )
     local TMP_DIRS=()
+
+    for pathname in "${HARDCODED[@]}"; do
+        if [ -e "$pathname" ]; then
+            TMP_DIRS+=( "$pathname" )
+        fi
+    done
+
 
     while IFS=  read -r -d $'\0'; do
         TMP_DIRS+=("$(readlink -f $REPLY)")
@@ -17,7 +25,7 @@ function workspace-finder() {
     IFS=$'\n' TMP_DIRS=($(sort <<<"${TMP_DIRS[*]}"))
     unset IFS
 
-    local TARGET_DIR=$(printf '%s\n' "${TMP_DIRS[@]}" | fzf)
+    local TARGET_DIR=$(printf '%s\n' "${TMP_DIRS[@]}" | fzf --preview 'ls -la --color=auto {}')
 
     [ $TARGET_DIR ] || return 0
 

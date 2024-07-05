@@ -6,8 +6,18 @@ for function in $HOME/.functions/??*; do
     source $(realpath $function)
 done
 
+
+if command -v fzf-share >/dev/null; then
+  source "$(fzf-share)/key-bindings.bash"
+  source "$(fzf-share)/completion.bash"
+fi
+
 # macOS specific
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
-# Workaround for weird ubuntu multi-user installation
-export NIX_PATH=home-manager=/home/baek/.nix-defexpr/channels/home-manager:unstable=/home/baek/.nix-defexpr/channels/unstable
+# NIX_PATH fallback 
+# Ubuntu
+# export NIX_PATH=home-manager=/home/baek/.nix-defexpr/channels/home-manager:unstable=/home/baek/.nix-defexpr/channels/unstable
+# 
+# Mac
+# export NIX_PATH=/Users/baek/.nix-defexpr/channels:darwin-config=/Users/baek/.nixpkgs/darwin-configuration.nix:/nix/var/nix/profiles/per-user/root/channels

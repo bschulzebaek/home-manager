@@ -53,7 +53,6 @@ in
     ".bashrc".source = ./dotfiles/bashrc;
     ".bash_profile".source = ./dotfiles/bash_profile;
     ".devenvrc".source = ./dotfiles/devenvrc;
-    ".fzf.bash".source = ./dotfiles/fzf.bash;
     ".inputrc".source = ./dotfiles/inputrc;
     ".profile".source = ./dotfiles/profile;
     ".prompt".source = ./dotfiles/prompt;

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 alias cc="clear"
-alias ll='ls -laht'
+alias ll='ls -la --color=auto'
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 
 alias yolo="git push -f"
@@ -9,8 +9,9 @@ alias sw="git switch"
 alias p="git push"
 alias s="git status"
 alias d="git diff"
-alias l="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'"
-alias l2="git log --all --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'"
+alias l="git log --oneline --decorate --color | fzf --ansi --preview 'git show \$(echo {} | cut -d\" \" -f1)'"
+alias l1="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'"
+alias l2="git log --all --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'"
 alias fp="git fetch && git pull"
 alias c="git commit"
 alias ca="git commit --amend"
@@ -20,5 +21,10 @@ alias grs="git reset --soft"
 alias grh="git reset --hard"
 
 alias wf="workspace-finder"
+
+#alias fzfp='fzf --preview="if [[ -d $1 ]]; then ls -la $1 elif [[ -f $1 ]]; then bat --color always --paging never $1 fi"'
+alias fzfp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
+
+alias psf="ps -aefr | fzf"
 
 alias zed="open -a /Applications/Zed.app -n"
