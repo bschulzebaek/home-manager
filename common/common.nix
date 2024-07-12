@@ -23,6 +23,8 @@ in
     go
 
     unstable.devenv
+
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
   programs.fzf.enable = true;
@@ -63,4 +65,6 @@ in
       recursive = true;
     };
   };
+
+  fonts.fontconfig.enable = true;
 }

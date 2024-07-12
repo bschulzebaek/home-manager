@@ -32,8 +32,7 @@ export NIX_PATH=home-manager=/home/baek/.nix-defexpr/channels/home-manager:unsta
 3. Run `darwin-rebuild switch` to apply the config
 
 ## Additional steps for setting up a new machine
-
-1. Install a [NerdFont](https://github.com/ryanoasis/nerd-fonts)
+1. Enable the nerdfont "JetBrains Mono" for your terminal. "JetBrains Mono" is installed automatically via home-manager. Any nerdfont is required for some UI symbols both in NeoVim and Tmux.
 2. Clone [neovim config](https://github.com/bschulzebaek/nvim) to `~/.config/`
     * Run `nvim` once to install plugins
 3. Clone [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) to `~/.tmux/plugins/`
