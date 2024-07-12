@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+function browse-log() {
+    git log --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"  | \
+        fzf --ansi --no-sort --reverse --tiebreak=index --preview \
+        'f() { set -- $(echo -- "$@" | grep -o "[a-f0-9]\{7\}"); [ $# -eq 0 ] || git show --color=always $1 ; }; f {}' \
+        --bind "j:down,k:up,alt-j:preview-down,alt-k:preview-up,ctrl-f:preview-page-down,ctrl-b:preview-page-up,q:abort,ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {}
+FZF-EOF" --preview-window=right:60%
+}
+
+
+function browse-diff() {
+    if [[ ! `git status --porcelain` ]]; then
+        echo "No changes in current directory."
+        return
+    fi
+
+    git diff @ $@ --name-only | fzf -m --ansi --preview='git diff @ $@ --color=always -- {-1}'
+}
+
+function better-switch() {
+    git switch $(git branch --all | grep -v '\*' | sed 's|remotes/||' | sed 's|origin/||' | sed 's|^ *||' | fzf)
+}
+
+function browse-remotes() {
+    echo "Not implemented"
+}
+
+function browse-branches() {
+    echo "Not implemented"
+}
+
+
+function file-undo-commit() {
+    local COMMIT_SHA="$1"
+
+    if [ -z ${COMMIT_SHA} ]; then 
+        echo "Missing required argument \"COMMIT_SHA\""
+        exit 0
+    fi
+
+    local FILE_NAME="$2"
+
+    if [ -z ${FILE_NAME} ]; then 
+        echo "Missing required argument \"FILE_NAME\""
+        exit 0
+    fi
+
+    git show $COMMIT_SHA -- $FILE_NAME | git apply -R
+}
