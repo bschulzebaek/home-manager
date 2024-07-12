@@ -22,9 +22,4 @@ alias grh="git reset --hard"
 
 alias wf="workspace-finder"
 
-#alias fzfp='fzf --preview="if [[ -d $1 ]]; then ls -la $1 elif [[ -f $1 ]]; then bat --color always --paging never $1 fi"'
-alias fzfp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
-
 alias psf="ps -aefr | fzf"
-
-alias zed="open -a /Applications/Zed.app -n"
