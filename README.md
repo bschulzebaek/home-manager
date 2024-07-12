@@ -33,8 +33,5 @@ export NIX_PATH=home-manager=/home/baek/.nix-defexpr/channels/home-manager:unsta
 
 ## Additional steps for setting up a new machine
 1. Enable the nerdfont "JetBrains Mono" for your terminal. "JetBrains Mono" is installed automatically via home-manager. Any nerdfont is required for some UI symbols both in NeoVim and Tmux.
-2. Clone [neovim config](https://github.com/bschulzebaek/nvim) to `~/.config/`
-    * Run `nvim` once to install plugins
-3. Clone [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) to `~/.tmux/plugins/`
-    1. Run `tmux`
-    2. Hit `<C-b>I` to install plugins
+2. To install NeoVim plugins, run it once
+3. To install Tmux plugins, run `tmux` and press `<C-b>` + `I` (capital i)
