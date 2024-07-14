@@ -20,10 +20,13 @@ __git_ext_fzf() {
     fzf \
     --ansi \
     --no-sort \
-    --reverse \
     --tiebreak=index \
     --preview-window=right:60% \
     "$@"
+}
+
+__git_ext_pick_branch() {
+    echo $(git branch -r | sed 's#^ *origin/##' | cat - <(git branch --format='%(refname:short)') | grep -v '^HEAD ->' | sort -u | __git_ext_fzf)
 }
 
 browse-log() {
@@ -60,11 +63,17 @@ browse-diff() {
 better-switch() {
     __git_ext_require_repository || return
 
-    if [ $# -eq 0 ]; then
-        git switch $(git branch -r | sed 's#^ *origin/##' | cat - <(git branch --format='%(refname:short)') | grep -v '^HEAD ->' | sort -u | __git_ext_fzf)
-    else
-        git switch $1
+    local ref=$1
+    
+    if [ -z ${ref} ]; then
+       ref=$(__git_ext_pick_branch)
     fi
+
+    if [ -z ${ref} ]; then
+        return 0
+    fi
+
+    git switch $ref
 }
 
 open-remote() {
