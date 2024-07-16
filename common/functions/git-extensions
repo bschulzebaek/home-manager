@@ -3,7 +3,7 @@
 __git_ext_require_repository() {
     git rev-parse HEAD > /dev/null 2>&1 && return 0
 
-    echo "Not in a git repository: $(PWD)"
+    echo "Not in a git repository: $PWD"
     return 1
 }
 
@@ -12,7 +12,7 @@ __git_ext_require_changes() {
         return 0
     fi
 
-    echo "No changes in current repository: $(PWD)"
+    echo "No changes in current repository: $PWD"
     return 1
 }
 
@@ -63,17 +63,17 @@ browse-diff() {
 better-switch() {
     __git_ext_require_repository || return
 
-    local ref=$1
-    
-    if [ -z ${ref} ]; then
-       ref=$(__git_ext_pick_branch)
-    fi
+    if [ $# -eq 0 ]; then
+        local ref=$(__git_ext_pick_branch)
 
-    if [ -z ${ref} ]; then
-        return 0
-    fi
+        if [ -z ${ref} ]; then
+            return 0
+        fi
 
-    git switch $ref
+        git switch $ref
+    fi
+ 
+    git switch "$@"
 }
 
 open-remote() {
