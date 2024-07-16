@@ -1,7 +1,7 @@
 #!/bin/bash
 
 alias cc="clear"
-alias ll='ls -la --color=auto'
+alias ls='ls -loGAF'
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 
 alias yolo="git push -f"
