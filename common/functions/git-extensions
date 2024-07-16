@@ -18,11 +18,11 @@ __git_ext_require_changes() {
 
 __git_ext_fzf() {
     fzf \
-    --ansi \
-    --no-sort \
-    --tiebreak=index \
-    --preview-window=right:60% \
-    "$@"
+        --ansi \
+        --no-sort \
+        --tiebreak=index \
+        --preview-window=right:60% \
+        "$@"
 }
 
 __git_ext_pick_branch() {
@@ -33,18 +33,25 @@ browse-log() {
     __git_ext_require_repository || return
     
     git log --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" | \
-    __git_ext_fzf \
-    --preview 'f() { set -- $(echo -- "$@" | grep -o "[a-f0-9]\{7\}"); [ $# -eq 0 ] || git show --color=always $1 ; }; f {}' \
-    --header "Enter: Fullscreen preview" \
-    --bind "ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up,enter:execute:
-            (grep -o '[a-f0-9]\{7\}' | head -1 |
-            xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
-            {} FZF-EOF"
+        __git_ext_fzf \
+            --preview 'f() { set -- $(echo -- "$@" | grep -o "[a-f0-9]\{7\}"); [ $# -eq 0 ] || git show --color=always $1 ; }; f {}' \
+            --header "Enter: Fullscreen preview" \
+            --bind "ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up,enter:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {} FZF-EOF"
 }
 
 browse-diff() {
     __git_ext_require_repository || return
-    __git_ext_require_changes || return
+
+    local range="@"
+
+    if [ $# -eq 0 ]; then
+        __git_ext_require_changes || return
+    else
+        range="$1"
+    fi
 
     local root=$(git rev-parse --show-toplevel)
 
@@ -52,8 +59,12 @@ browse-diff() {
         pushd "$root" > /dev/null
     fi
 
-    git diff @ $@ --name-only | \
-    __git_ext_fzf --preview='git diff @ $@ --color=always -- {-1}' --bind "ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up"
+    git diff $range --name-only | \
+        __git_ext_fzf  \
+            --multi \
+            --header="(Shift +) Tab: select files & move to next line" \
+            --preview="git diff $range --patch-with-stat --color=always -- {-1}" \
+            --bind "ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up"
 
     if [ -n "$root" ]; then
         popd > /dev/null

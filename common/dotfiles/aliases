@@ -20,6 +20,7 @@ alias gcl="git clean -fd"
 alias grs="git reset --soft"
 alias grh="git reset --hard"
 
+alias hmb="home-manager switch && exec bash"
 alias wf="workspace-finder"
 
 alias psf="ps -aefr | fzf"
