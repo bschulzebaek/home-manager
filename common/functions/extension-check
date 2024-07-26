@@ -39,3 +39,32 @@ function extension-check() {
 
 
 }
+
+function compare-versions() (
+    if [ $# -ne 2 ]
+    then
+        echo "Error: Missing arguments! Please provide two .zip archives to compare: compare-versions OLD_ZIP NEW_ZIP" 1>&2
+        return 1
+    fi
+
+    zip_a=$(echo "$(cd "$(dirname "$1")"; pwd)/$(basename "$1")")
+    zip_b=$(echo "$(cd "$(dirname "$2")"; pwd)/$(basename "$2")")
+
+    tmpdir=$(mktemp -d 2>/dev/null || mktemp -d -t 'extension-review-diff')
+
+    cd $tmpdir
+
+    git init -q
+    unzip -q $zip_a
+    git add .
+    git commit -m "Initial commit" -q
+
+    rm -rf ./* 
+
+    unzip -q $zip_b 
+    git add .
+
+    browse-diff
+
+    rm -rf $tmpdir
+)
