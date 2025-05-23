@@ -16,6 +16,7 @@ in
     zip
     ripgrep
     jq
+    atuin
 
     rustup
     python3
