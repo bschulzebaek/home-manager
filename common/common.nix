@@ -46,6 +46,7 @@ in
       safe.directory = "*";
     };
   };
+
   programs.neovim = {
     enable = true;
     vimAlias = true;
