@@ -22,6 +22,7 @@ in
     python3
     nodejs_22
     go
+    dotnet-sdk
 
     unstable.devenv
 
