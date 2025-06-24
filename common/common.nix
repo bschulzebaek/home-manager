@@ -16,7 +16,6 @@ in
     zip
     ripgrep
     jq
-    atuin
 
     rustup
     python3
@@ -32,6 +31,7 @@ in
   programs.fzf.enable = true;
   programs.bat.enable = true;
   programs.direnv.enable = true;
+
   programs.git = {
     enable = true;
     extraConfig = {
